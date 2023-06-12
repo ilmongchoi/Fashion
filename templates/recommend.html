@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fashion That Suits You</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        background-image: url("static/recommend_img.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 960px;
+        padding: 20px;
+        width: 100%;
+      }
+      
+      .form {
+        background-color: rgba(249, 249, 249, 0.44);
+        border-radius:10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        padding: 80px;
+        width: 100%;
+      }
+      
+      .form h2 {
+        margin-top: 0;
+      }
+      
+      .form label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      .form input[type="text"],
+      .form select {
+        width: 100%;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+      
+      .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .button:hover {
+        background-color: #3e8e41;
+      }
+      
+      /* Home button style */
+      #home-button {
+        font-family: "Goudy Old Style", serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        padding: 5px;
+        margin: auto;
+        display: block;
+        border-radius: 5px;
+        background-color: #000;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        transform: translateX(-50%);
+      }
+      
+      #home-button:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        background-color: #fff;
+        color: #000;
+      }
+      
+      /* Reset button style */
+      .reset-button {
+        font-size: 12px;
+        border: none;
+        background-color: transparent;
+        color: #777;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+      
+      .reset-button:hover {
+        color: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="home-button">🏠</button>
+    <!-- 홈 버튼 클릭 동작 기능 -->
+    <script>
+      const homeButton = document.querySelector('#home-button');
+      homeButton.addEventListener('click', () => {
+        window.location.href = '/';
+      });
+
+      //findStyleButton 클릭 시 Findstyle.html 페이지로 이동
+      const findStyleButton = document.querySelector('.button');
+      findStyleButton.addEventListener('click', () => {
+        window.location.href = 'Findstyle.html';
+      });
+
+      //퍼스널컬러와 컬러 옵션을 토글 기능 함수
+      function showPersonalColorOptions() {
+        //요소 가져옴
+        const personalColorCheckbox = document.getElementById('personal-color-checkbox');
+        const colorCheckbox = document.getElementById('color-checkbox');
+        const personalColorComboBox = document.getElementById('personal-color');
+        const colorComboBox = document.getElementById('color');
+
+        //퍼스널컬러 체크박스 선택시 퍼스널컬러 옵션 보이기, 컬러 옵션 숨기기
+        if (personalColorCheckbox.checked) {
+          personalColorCheckbox.checked = true;
+          colorCheckbox.checked = false;
+          personalColorComboBox.style.display = 'block';
+          colorComboBox.style.display = 'none';
+        }
+        //컬러 체크박스 선택시 위와 반대로 동작
+        else if (colorCheckbox.checked) {
+          personalColorCheckbox.checked = false;
+          colorCheckbox.checked = true;
+          personalColorComboBox.style.display = 'none';
+          colorComboBox.style.display = 'block';
+        } 
+        //어느 체크박스도 선택되지 않은 경우, 옵션 모두 숨김
+        else {
+          personalColorCheckbox.checked = false;
+          colorCheckbox.checked = false;
+          personalColorComboBox.style.display = 'none';
+          colorComboBox.style.display = 'none';
+        }
+      }
+
+      //컬러 옵션과 퍼스널컬러 옵션 스위치 기능
+      function switchToColor() {
+        const personalColorCheckbox = document.getElementById('personal-color-checkbox');
+        const colorCheckbox = document.getElementById('color-checkbox');
+        const personalColorComboBox = document.getElementById('personal-color');
+        const colorComboBox = document.getElementById('color');
+
+        //컬러 체크박스 선택시 컬러 옵션 보이기, 퍼스널컬러 옵션 숨기기
+        if (colorCheckbox.checked) {
+          personalColorCheckbox.checked = false;
+          colorCheckbox.checked = true;
+          personalColorComboBox.style.display = 'none';
+          colorComboBox.style.display = 'block';
+        } else if (personalColorCheckbox.checked) {
+          personalColorCheckbox.checked = true;
+          colorCheckbox.checked = false;
+          personalColorComboBox.style.display = 'block';
+          colorComboBox.style.display = 'none';
+        } else {
+          personalColorCheckbox.checked = false;
+          colorCheckbox.checked = false;
+          personalColorComboBox.style.display = 'none';
+          colorComboBox.style.display = 'none';
+        }
+      }
+
+      //체크박스 선택 리셋 함수
+      function resetSelection() {
+        const personalColorCheckbox = document.getElementById('personal-color-checkbox');
+        const colorCheckbox = document.getElementById('color-checkbox');
+        const personalColorComboBox = document.getElementById('personal-color');
+        const colorComboBox = document.getElementById('color');
+        
+        //모든 체크박스 해제하고 옵션 숨기기
+        personalColorCheckbox.checked = false;
+        colorCheckbox.checked = false;
+        personalColorComboBox.style.display = 'none';
+        colorComboBox.style.display = 'none';
+      }
+    </script>
+
+    <script>
+      //폼 제출 처리 함수
+      function submitForm() {
+        //요소 가져오기
+        const personalColorComboBox = document.getElementById('personal-color');
+        const colorComboBox = document.getElementById('color');
+        const fashionStyleComboBox = document.getElementById('fashion-style');
+        const seasonComboBox = document.getElementById('season');
+        const genderComboBox = document.getElementById('gender');
+
+        //선택된 값 가져오기
+        const selectedPersonalColor = personalColorComboBox.style.display !== 'none' ? personalColorComboBox.value : null;
+        const selectedColor = colorComboBox.style.display !== 'none' ? colorComboBox.value : null;
+        const selectedFashionStyle = fashionStyleComboBox.value;
+        const selectedSeason = seasonComboBox.value;
+        const selectedGender = genderComboBox.value;
+
+        //form 엘리먼트 동적으로 생성(사용자 입력 정보 처리)
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/recommend';
+
+        // 선택한 값들을 숨겨진 입력 필드로 추가
+        const personalColorInput = document.createElement('input');
+        personalColorInput.type = 'hidden';
+        personalColorInput.name = 'personal-color';
+        personalColorInput.value = selectedPersonalColor;
+        form.appendChild(personalColorInput);
+
+        const colorInput = document.createElement('input');
+        colorInput.type = 'hidden';
+        colorInput.name = 'color';
+        colorInput.value = selectedColor;
+        form.appendChild(colorInput);
+
+        const fashionStyleInput = document.createElement('input');
+        fashionStyleInput.type = 'hidden';
+        fashionStyleInput.name = 'fashion-style';
+        fashionStyleInput.value = selectedFashionStyle;
+        form.appendChild(fashionStyleInput);
+
+        const seasonInput = document.createElement('input');
+        seasonInput.type = 'hidden';
+        seasonInput.name = 'season';
+        seasonInput.value = selectedSeason;
+        form.appendChild(seasonInput);
+
+        const genderInput = document.createElement('input');
+        genderInput.type = 'hidden';
+        genderInput.name = 'gender';
+        genderInput.value = selectedGender;
+        form.appendChild(genderInput);
+
+        //from을 body에 추가하고 제출
+        document.body.appendChild(form);
+        form.submit();
+      }
+    </script>
+
+    <div class="container">
+      <div class="form">
+        <h2>Fashion That Suits You</h2>
+        <form action="/recommend" method="POST">
+          <div style="display: flex; justify-content: space-between;">
+            <div style="width: 45%;">
+              <label for="color">Color:</label>
+              <input type="checkbox" id="personal-color-checkbox" name="personal-color-checkbox" onclick="showPersonalColorOptions()"> 퍼스널컬러
+              <input type="checkbox" id="color-checkbox" name="color-checkbox" onclick="switchToColor()"> 컬러
+              <button class="reset-button" type="button" onclick="resetSelection()">Reset</button>
+              <select id="personal-color" name="personal-color" style="display: none;">
+                <option value="">--Select Color--</option>
+                <!-- 퍼스널컬러 기본 16타입 -->
+                <option value="Spring Light">봄라이트</option>
+                <option value="Spring Bright">봄브라이트</option>
+                <option value="Spring Vivid">봄비비드</option>
+                <option value="Spring Soft">봄소프트</option>
+                <option value="Summer Light">여름라이트</option>
+                <option value="Summer Soft">여름소프트</option>
+                <option value="Summer Bright">여름브라이트</option>
+                <option value="Summer Muted">여름뮤트</option>
+                <option value="Autumn Soft">가을소프트</option>
+                <option value="Autumn Muted">가을뮤트</option>
+                <option value="Autumn Deep">가을딥</option>
+                <option value="Autumn Dark">가을다크</option>
+                <option value="Winter Light">겨울라이트</option>
+                <option value="Winter Clear">겨울클리어</option>
+                <option value="Winter Vivid">겨울비비드</option>
+                <option value="Winter Deep">겨울딥</option>
+              </select>
+
+              <select id="color" name="color" style="display: none;">
+                <option value="">--Select Color--</option>
+                <option value="white">화이트</option>
+                <option value="beige">베이지</option>
+                <option value="brown">브라운</option>
+                <option value="gray">그레이</option>
+                <option value="black">블랙</option>
+                <option value="navy">네이비</option>
+                <option value="blue">블루</option>
+                <option value="skyblue">스카이블루</option>
+                <option value="pink">핑크</option>
+                <option value="coral">코랄</option>
+                <option value="red">레드</option>
+                <option value="wine">와인</option>
+                <option value="yellow">옐로우</option>
+                <option value="mustard">머스타드</option>
+                <option value="khaki">카키</option>
+                <option value="green">그린</option>
+                <option value="mint">민트</option>
+                <option value="lavender">라벤더</option>
+                <option value="purple">퍼플</option>
+              </select>
+            </div>
+
+            <div style="width: 45%;">
+              <label for="fashion-style">Fashion Style:</label>
+              <select id="fashion-style" name="fashion-style">
+                <option value="">--Select Style--</option>
+                <option value="casual">캐주얼</option>
+                <option value="lovely">러블리</option>
+                <option value="office">오피스룩</option>
+                <option value="unique">유니크</option>
+                <option value="basic">베이직</option>
+                <option value="glam">글램</option>
+                <option value="minimal">미니멀</option>
+                <option value="kitsch-hip">키치&힙</option>
+                <option value="business-casual">비즈니스 캐주얼</option>
+                <option value="high-teen">하이틴</option>
+                <option value="sporty">스포티</option>
+                <option value="modern">모던</option>
+                <option value="street">스트릿</option>
+                <option value="chic">시크</option>
+                <option value="vintage">빈티지</option>
+                <option value="hippie">히피</option>
+                <option value="punk">펑크</option>
+                <option value="luxury">럭셔리</option>
+                <option value="retro">레트로</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between;">
+            <div style="width: 45%;">
+              <label for="season">Season:</label>
+              <select id="season" name="season">
+                <option value="">--Select Season--</option>
+                <option value="spring">봄</option>
+                <option value="summer">여름</option>
+                <option value="fall">가을</option>
+                <option value="winter">겨울</option>
+              </select>
+            </div>
+
+            <div style="width: 45%;">
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender">
+                <option value="">--Select Gender--</option>
+                <option value="man">Man</option>
+                <option value="woman">Woman</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="button" type="button" onclick="submitForm()">Find Style</button>
+        </form>
+      </div>
+    </div>    
+  </body>
+</html>

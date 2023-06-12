@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dress for you</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-size: cover;
+            background-image: url('static/recommend_img.jpg');
+        }
+
+        .title {
+            background-color: rgba(191, 229, 244, 0.585);
+            color: #393939;
+            text-align: center;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            font-size: 2.2em;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            font-weight: bold;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: auto; /* 스크롤 추가 */
+        }
+
+        .img-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 이미지 스타일 */
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* 이미지 가운데 정렬 */
+        .centered-image { 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px; /* 이미지 아래 여백을 조정하려면 추가 */
+        }
+
+        /* home 버튼 스타일 */
+        #home {
+            font-family: "Goudy Old Style", serif;
+            font-weight: bold;
+            font-size: 18px;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            margin: auto;
+            display: block;
+            border-radius: 5px;
+            background-color: #000;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transform: translateX(-50%);
+        }
+        /* 홈 버튼 호버 효과 */
+        #home:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* 정보 박스 스타일 */
+        .box {
+            background-color: rgba(220, 238, 245, 0.585);
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center; /* 가로 가운데 정렬을 위해 추가 */
+            margin: 0 auto; /* 가로 가운데 정렬을 위해 추가 */
+        }
+
+        /* 줄바꿈 보존 */
+        .break-line {
+            white-space: pre-line;
+            margin-bottom: 10px; /* 줄 간격을 조정하기 위해 추가 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Dress for you</div>
+        <div class="box">
+            <h1>추천 결과</h1>
+            <div class="break-line">&nbsp;</div> <!-- 줄바꿈 -->
+            <div class="break-line">{{ answer1_korea }}</div> <!-- 줄바꿈 보존 -->
+            <div class="break-line">&nbsp;</div>
+        </div>
+        <div class="break-line">&nbsp;</div>
+        <!-- 생성된 이미지 출력 -->
+        {% for image_url in image_urls %}
+            <img class="centered-image" src="{{ image_url }}" alt="Generated Image">
+        {% endfor %}
+    </div>
+    
+    <button id="home" href="/">🏠</button>
+    <!-- 홈 버튼 클릭 동작 기능 -->
+    <script>
+        const homeButton = document.querySelector('#home');
+        homeButton.addEventListener('click', () => {
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fashion Mate</title>
+    <style>
+      /* 본문 스타일 */
+      body {
+        background-image: url("static/mainweb_img.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: "Goudy Old Style", serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* 제목 스타일 */
+      h1 {
+        font-family: "Goudy Old Style", serif;
+        font-weight: bold;
+        font-size: 36px;
+        color: #fff;
+        text-align: center;
+        margin-top: 10%;
+        background-color: rgba(245, 245, 220, 0.5);
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      button {
+        font-family: "Goudy Old Style", serif;
+        font-weight: bold;
+        font-size: 24px;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        margin: auto;
+        display: block;
+        border-radius: 5px;
+        background-color: rgba(245, 245, 220, 0.5);
+        cursor: pointer;
+      }
+
+      /* 버튼 호버 상태(마우스가 버튼 위 위치 상태) */
+      button:hover {
+        background-color: #fff;
+        color: #000;
+      }
+
+      #dress-for-weather {
+        float: none;
+        display: block;
+        margin: 30px auto 0 auto;
+      }
+
+      #fashion-suits-you {
+        float: none;
+        display: block;
+        margin: 20px auto 0 auto;
+      }
+
+      /* home 버튼 스타일 */
+      #home {
+        font-family: "Goudy Old Style", serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        padding: 5px;
+        margin: auto;
+        display: block;
+        border-radius: 5px;
+        background-color: #000;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        transform: translateX(-50%);
+      }
+
+      #home:hover {
+        background-color: #fff;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fashion Mate</h1>
+    <div>
+      <button id="dress-for-weather">Dress for the weather</button>
+      <button id="fashion-suits-you">Fashion That Suits You</button>
+    </div>
+    <a id="home" href="/">🏠</a>
+
+    <script>
+      //맞춤 추천 버튼 이벤트 리스너
+      const fashionSuitsYouButton = document.getElementById('fashion-suits-you');
+      fashionSuitsYouButton.addEventListener('click', () => {
+        window.location.href = '/recommend';//recommend 웹 페이지로 이동
+      });
+      //날씨 맞춤 추천 버튼 이벤트 리스너
+      const dressForWeatherButton = document.getElementById('dress-for-weather');
+      dressForWeatherButton.addEventListener('click', () => {
+        window.location.href = '/weather';//weather 웹 페이지로 이동
+      });
+    </script>
+  </body>
+</html>
